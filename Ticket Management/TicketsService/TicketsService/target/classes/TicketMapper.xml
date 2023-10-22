@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ticketsservice.Mapper.TicketMapper">
+    <resultMap id="resultMap" type="com.example.ticketsservice.Model.Ticket">
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="STATUS" property="status" jdbcType="VARCHAR" />
+        <result column="PRIORITY" property="priority" jdbcType="INTEGER" />
+        <collection  property="comments"  ofType="com.example.ticketsservice.Model.Comment">
+            <id property="cid" column="CID" />
+            <result property="comment" column="COMMENT" />
+            <result property="tid" column="TID" />
+            <result property="date" column="DATE" />
+            <result property="author" column="AUTHOR" />
+        </collection>
+    </resultMap>
+    <select id="returnAll" resultMap="resultMap">
+        select * from tickets
+    </select>
+    <insert id="addTicket">
+        insert into tickets(status,priority) values(#{status},#{priority})
+    </insert>
+    <select id="findTicket" resultMap="resultMap">
+        select * from tickets where status = #{status}
+    </select>
+    <update id="changeStatus">
+        UPDATE tickets set status = #{status} where {id} = #{tid}
+    </update>
+    <select id="findById" resultMap="resultMap">
+        select * from tickets where {id} = #{tid}
+    </select>
+    <select id="getComments" resultMap="resultMap">
+        select
+            *
+        from
+            tickets t
+                inner join
+            joiners j
+            on
+                t.id=j.tid
+                inner join
+            comments c
+            on
+                j.cid=c.cid
+        where t.id = #{id}
+    </select>
+</mapper>

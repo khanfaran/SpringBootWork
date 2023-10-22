@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ticketsservice.Mapper.JoinerMapper">
+    <resultMap id="resultMap" type="com.example.ticketsservice.Model.Joiner">
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="TID" property="tid" jdbcType="VARCHAR" />
+        <result column="CID" property="cid" jdbcType="INTEGER" />
+    </resultMap>
+    <insert id="createJoiner">
+        insert into joiners(cid,tid) values(#{cid},#{tid})
+    </insert>
+    <select id="getAll">
+        select * from joiners;
+    </select>
+</mapper>

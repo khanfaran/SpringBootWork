@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ticketsservice.Mapper.CommentMapper">
+    <resultMap id="resultMap" type="com.example.ticketsservice.Model.Comment">
+        <id column="CID" property="cid" jdbcType="INTEGER" />
+        <result column="COMMENT" property="comment" jdbcType="VARCHAR" />
+        <result column="AUTHOR" property="author" jdbcType="VARCHAR" />
+        <result column="TID" property="tid" jdbcType="INTEGER" />
+    </resultMap>
+    <insert id="addComment">
+        insert into comments(comment,tid, author) values(#{comment},#{tid},#{author})
+    </insert>
+    <select id="getAllComments" resultMap="resultMap">
+        select * from comments;
+    </select>
+
+    <select id="selectLast" resultMap="resultMap">
+        select top 1 * from comments ORDER BY CID DESC;
+    </select>
+    <select id="selectLastComment" resultMap="resultMap">
+        select top 1 * from comments where tid = #{tid} ORDER BY CID DESC;
+    </select>
+</mapper>

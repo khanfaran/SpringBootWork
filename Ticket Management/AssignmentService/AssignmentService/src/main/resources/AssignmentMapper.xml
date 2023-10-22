@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.assignmentservice.Mapper.AssignmentMapper">
+    <insert id="createAssignment">
+        insert into assignments(uid,tid) values(#{uid},#{tid})
+    </insert>
+
+    <select id="getAll" resultType="com.example.assignmentservice.Model.Assignment">
+        select * from assignments
+    </select>
+
+    <select id="findUserTickets" resultType="com.example.assignmentservice.Model.Assignment">
+        select * from assignments where uid = #{uid}
+    </select>
+
+
+</mapper>
